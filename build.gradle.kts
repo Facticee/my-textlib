@@ -30,22 +30,3 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-        }
-    }
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/facticee/textlib")
-            credentials {
-
-                username = System.getenv("GITHUB_USERNAME")
-                password = System.getenv("GITHUB_COMPONENTLIB_TOKEN")
-            }
-        }
-    }
-}
-
