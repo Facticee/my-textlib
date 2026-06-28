@@ -97,6 +97,48 @@ dependencies {
     <version>Tag</version>
 </dependency>
 ```
+<br>
+
+## Local Setup (without JitPack
+
+If you don't want to use JitPack (e.g. offline builds, your own forks, or just don't want to wait on JitPack build times), you can also include the jar locally.
+
+1. Download the jar from the [Releases](https://github.com/Facticee/my-textlib/releases) page (or build it yourself with `./gradlew build`).
+2. Put it somewhere in your project, e.g. a `libs/` folder.
+
+#### Gradle (Kotlin DSL)
+
+```kotlin
+dependencies {
+    implementation(files("libs/my-textlib-1.0.0.jar"))
+}
+```
+
+#### Gradle (Groovy DSL)
+
+```groovy
+dependencies {
+    implementation files('libs/my-textlib-1.0.0.jar')
+}
+```
+
+> Note: if the library itself has dependencies (e.g. Kotlin stdlib, Adventure API), you'll need to add those as separate `implementation(...)` lines too, since `files(...)` doesn't resolve transitive dependencies.
+
+#### Maven
+
+Local jars need to be added via a `system`-scope dependency or a local repo:
+
+```xml
+<dependency>
+    <groupId>com.github.Facticee</groupId>
+    <artifactId>my-textlib</artifactId>
+    <version>1.0.0</version>
+    <scope>system</scope>
+    <systemPath>${project.basedir}/libs/my-textlib-1.0.0.jar</systemPath>
+</dependency>
+```
+
+> `system` scope is more of a workaround — cleaner would be `mvn install:install-file` to install the jar into your local `.m2` repo if you want to do it properly.
  
 ---
  
